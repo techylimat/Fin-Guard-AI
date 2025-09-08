@@ -1,0 +1,13 @@
+streamlit
+python-dotenv
+langchain
+chromadb
+sentence-transformers
+transformers
+torch
+guardrails-ai
+huggingface_hub
+pydantic
+fastapi
+uvicorn
+tqdm
