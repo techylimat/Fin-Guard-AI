@@ -11,16 +11,16 @@ huggingface-hub==0.22.2
 transformers==4.42.3
 sentence-transformers==2.6.1
 
-# Guardrails for validation
+# Guardrails AI for response validation
 guardrails-ai==0.4.0
 
-# Fix lxml build error with pre-built wheel
+# Fix lxml build issue
 lxml==4.9.3
 
-# UI improvements
+# UI enhancements
 rich==14.1.0
 
-# PDFs
+# PDF handling
 pypdf2==3.0.1
 
 # Vector database
