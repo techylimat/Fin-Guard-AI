@@ -1,27 +1,9 @@
-# Core
-streamlit==1.36.0
-python-dotenv==1.0.1
-
-# LangChain ecosystem
-langchain==0.2.1
-langchain-community==0.2.1
-huggingface-hub==0.22.2
-
-# Models and embeddings
-transformers==4.42.3
-sentence-transformers==2.6.1
-
-# Guardrails AI for response validation
-guardrails-ai==0.4.0
-
-# Fix lxml build issue
+streamlit==1.37.0
+pandas==2.2.2
+numpy==1.26.4
+requests==2.32.3
+beautifulsoup4==4.12.3
+html5lib==1.1
+huggingface-hub==0.24.0
+guardrails-ai==0.5.0
 lxml==4.9.3
-
-# UI enhancements
-rich==14.1.0
-
-# PDF handling
-pypdf2==3.0.1
-
-# Vector database
-chromadb==0.4.24
