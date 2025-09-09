@@ -1,0 +1,4 @@
+fin-guard-ai/
+│
+├── chroma_db/
+│   └── (index files will be here after first run)
