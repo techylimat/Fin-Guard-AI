@@ -7,5 +7,6 @@ langchain==0.2.16
 langchain-huggingface==0.1.2
 langchain-chroma==0.1.4
 chromadb==0.5.0
-sentence-transformers==2.2.2
+sentence-transformers==2.6.1
 tiktoken==0.7.0
+pandas==2.2.2
