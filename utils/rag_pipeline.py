@@ -1,39 +1,37 @@
 import os
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
+from dotenv import load_dotenv
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
-from langchain.llms import HuggingFaceHub
-from utils.guardrails_setup import validate_output
+from langchain_community.llms import HuggingFaceHub
+from langchain.prompts import PromptTemplate
 
-def run_rag_query(query: str) -> str:
-    """
-    Runs the RAG query using LangChain and applies guardrails validation.
-    """
-    try:
-        # Load embeddings
-        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+# Load environment variables
+load_dotenv()
 
-        # Load vector store
-        persist_dir = "vector_store"
-        if not os.path.exists(persist_dir):
-            return "⚠️ Error: Vector store not found. Please build it before running the app."
+def run_rag_query(query: str):
+    """Run a simple RAG pipeline using HuggingFace and Chroma."""
 
-        vector_store = Chroma(persist_directory=persist_dir, embedding_function=embeddings)
+    # Initialize embeddings
+    embeddings = HuggingFaceEmbeddings()
 
-        # Load LLM
-        llm = HuggingFaceHub(
-            repo_id="google/flan-t5-base",
-            model_kwargs={"temperature": 0.2, "max_length": 512}
-        )
+    # Load documents from local Chroma database
+    # Make sure you have a folder called 'chroma_db' in your project
+    vectorstore = Chroma(persist_directory="chroma_db", embedding_function=embeddings)
 
-        # Create RAG chain
-        qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=vector_store.as_retriever())
+    # Initialize HuggingFace LLM
+    llm = HuggingFaceHub(
+        repo_id="google/flan-t5-base",
+        huggingfacehub_api_token=os.getenv("HF_API_TOKEN")
+    )
 
-        # Run query
-        result = qa_chain.run(query)
+    # Create retrieval chain
+    qa_chain = RetrievalQA.from_chain_type(
+        llm=llm,
+        retriever=vectorstore.as_retriever(),
+        chain_type="stuff"
+    )
 
-        # Validate response with guardrails
-        return validate_output(result)
-
-    except Exception as e:
-        return f"❌ An error occurred: {str(e)}"
+    # Run the query
+    result = qa_chain.run(query)
+    return result
