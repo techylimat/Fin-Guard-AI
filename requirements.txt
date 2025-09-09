@@ -7,3 +7,4 @@ huggingface-hub==0.24.6
 pypdf==5.0.1
 chromadb==0.5.5
 python-dotenv==1.0.1
+guardrails-ai==0.4.1
