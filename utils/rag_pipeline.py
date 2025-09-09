@@ -1,23 +1,23 @@
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_chroma import Chroma
 from langchain_community.llms import HuggingFaceHub
 from langchain.chains import RetrievalQA
 import os
 
+
 def run_rag_query(query: str) -> str:
     """
-    Run a simple RAG pipeline using HuggingFace and Chroma.
-    Make sure you have a folder called 'chroma_db' with indexed documents.
+    Run a clean, modern RAG pipeline using HuggingFace and Chroma.
     """
     # Load environment variables
     hf_api_key = os.getenv("HUGGINGFACEHUB_API_TOKEN")
     if not hf_api_key:
         return "Error: HuggingFace API token not found. Please set it in Streamlit Secrets."
 
-    # Initialize embeddings
+    # Initialize embeddings (explicit model name to avoid warnings)
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-    # Load vector database (Chroma)
+    # Load vector database
     vectorstore = Chroma(
         persist_directory="chroma_db",
         embedding_function=embeddings
