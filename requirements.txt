@@ -3,10 +3,10 @@ torch==2.3.0
 torchvision==0.18.0
 triton==2.3.0
 transformers==4.48.3
-langchain==0.2.16
-langchain-huggingface==0.1.2
+langchain==0.3.7
+langchain-huggingface==0.0.3
 langchain-chroma==0.1.4
-chromadb==0.5.0
+chromadb==0.5.5
 sentence-transformers==2.6.1
 tiktoken==0.7.0
 pandas==2.2.2
